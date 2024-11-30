@@ -4,6 +4,14 @@ version = "0.1.0"
 edition = "2021"
 
 [lib]
-crate-type = ["cdylib"]
+# cydlib - so that it can be used with c and cpp as well (dynamic linking)
+# rlib - so that we can use it as rust library (with rust static linking)
+crate-type = ["cdylib", "rlib"]
 
 [dependencies]
+chrono = "0.4.38"
+env_logger = "0.11.5"
+lazy_static = "1.5.0"
+log = "0.4"
+thiserror = "2.0.3"
+tracing = "0.1.40"
