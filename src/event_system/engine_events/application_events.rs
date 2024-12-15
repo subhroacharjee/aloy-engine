@@ -1,4 +1,4 @@
-use std::{any::Any, i128};
+use std::any::Any;
 
 use super::engine_events::EngineEvent;
 use crate::{
@@ -15,7 +15,7 @@ pub enum ApplicationEvents {
 
 impl EngineEvent for ApplicationEvents {
     fn get_category(&self) -> super::engine_events::EngineEventCategory {
-        return super::engine_events::EngineEventCategory::Application;
+        super::engine_events::EngineEventCategory::Application
     }
 
     fn get_parent_category(&self) -> Option<super::engine_events::EngineEventCategory> {
@@ -26,10 +26,7 @@ impl EngineEvent for ApplicationEvents {
 
     fn has_event(name: String) -> bool {
         let n: &str = &name;
-        match n {
-            "ExampleEvent" | "ExampleEventWithData" | "Exit" => true,
-            _ => false,
-        }
+        matches!(n, "ExampleEvent" | "ExampleEventWithData" | "Exit")
     }
 }
 
@@ -39,7 +36,6 @@ impl Event for ApplicationEvents {
             Self::ExampleEvent => "ExampleEvent".to_string(),
             Self::ExampleEventWithData(_, _) => "ExampleEventWithData".to_string(),
             Self::Exit(_) => "Exit".to_string(),
-            _ => "ApplicationEvents".to_string(),
         }
     }
 

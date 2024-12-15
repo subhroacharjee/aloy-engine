@@ -6,14 +6,10 @@ use std::{
 
 use log::{error, info, trace};
 
-use crate::{
-    core::runner::exit_handlers,
-    event_system::{
-        engine_events::application_events::ApplicationEvents,
-        event::Event,
-        event_dispatcher::{EventDispatcher, EventDispatcherErrors},
-        event_queue::{self, EventQueueErrors},
-    },
+use crate::event_system::{
+    event::Event,
+    event_dispatcher::{EventDispatcher, EventDispatcherErrors},
+    event_queue::{self, EventQueueErrors},
 };
 
 use super::exit_handlers::ExitReason;
@@ -27,7 +23,7 @@ pub struct Application {
 impl Application {
     fn initalize(&mut self) {
         let exit_event = "Exit".to_string();
-        let mut exit_flag = Arc::clone(&self.exit_flag);
+        let exit_flag = Arc::clone(&self.exit_flag);
         if let Some(err) = self.on_event(exit_event, move |e| {
             if let Some(exit) = e.get_data().unwrap().get_ref::<ExitReason>() {
                 if let Ok(mut exit_flag) = exit_flag.try_lock() {

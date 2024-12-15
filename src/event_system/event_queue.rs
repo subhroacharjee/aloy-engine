@@ -114,7 +114,7 @@ mod tests {
         }
 
         fn get_data(&self) -> Option<DynamicStore> {
-            return None;
+            None
         }
     }
 
